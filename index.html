@@ -6,9 +6,10 @@
 </head>
 
 <body>
-    <div data-mariana-integrations="/account"></div>
+    <!-- <div data-mariana-integrations="/account"></div> -->
+    <div id="main"></div>
 
-    <script>
+    <!-- <script>
         (function () {
           // Set tenant name here
           var TENANT_NAME = 'basecamp';
@@ -29,5 +30,8 @@
         <a href="https://marianatek.com/?ref_noscript" rel="nofollow">
           Web Integrations by Mariana Tek.
         </a>
-      </noscript>
+      </noscript> -->
+      <script type="text/javascript">
+        document.getElementById("main").addEventListener('click', alert('Clicked the element!'));
+    </script>
 </body>
