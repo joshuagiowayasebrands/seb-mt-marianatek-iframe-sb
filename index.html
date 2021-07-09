@@ -3,6 +3,7 @@
 
 <head>
   <title>MarianaTek Iframe</title>
+  <meta http-equiv="Content-Security-Policy" content="connect-src https://dni.trumeasure.com/Scripts/TMLoader.js http://different-goodsite.com">
 </head>
 
 <body>
@@ -30,7 +31,28 @@
           Web Integrations by Mariana Tek.
         </a>
       </noscript>
-      <script type="text/javascript">
-        document.getElementById("main").addEventListener('click', alert('Clicked the element!'));
-    </script>
+      <script>
+            const observer = new MutationObserver(mutations => {
+                mutations.forEach(({ addedNodes }) => {
+                    addedNodes.forEach(node => {
+                        // For each added script tag
+                        if(node.nodeType === 1 && node.tagName === 'SCRIPT') {
+                            const src = node.src || ''
+                            const type = node.type
+                            // If the src is inside your blacklist
+                            if(needsToBeBlacklisted(src, type)) {
+                            // Do some stuff that will prevent the script tag loading ;)
+                            // (See below…)
+                            }
+                        }
+                    })
+                })
+            })
+
+            // Starts the monitoring
+            observer.observe(document.documentElement, {
+                childList: true,
+                subtree: true
+            })
+      </script>
 </body>
